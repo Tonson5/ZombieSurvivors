@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public float moveSpeed;
     public float turnSpeed;
     public GameObject[] enemies;
+    public int health;
+    public RawImage image;
+    public Texture fullHealth;
+    public Texture mediumHealth;
+    public Texture lowHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +23,22 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         RotatePlayer();
+        if (health == 3)
+        {
+            image.texture = fullHealth;
+        }
+        else if (health == 2)
+        {
+            image.texture = mediumHealth;
+        }
+        else if(health == 1)
+        {
+            image.texture = lowHealth;
+        }
+        if (health == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
