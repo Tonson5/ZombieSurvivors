@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public float moveSpeed;
+    public float turnSpeed;
     public GameObject[] enemies;
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 placeToLook = enemies[0].transform.position;
             }
-            transform.forward = placeToLook - transform.position;
+            Vector3 direction = placeToLook - transform.position;
+            Quaternion desiredRotation = Quaternion.LookRotation(direction); 
+            Quaternion deltaRotation = desiredRotation * Quaternion.Inverse(transform.rotation);
+            Vector3 torque = new Vector3(deltaRotation.x, deltaRotation.y, deltaRotation.z) * turnSpeed;
+            rb.AddTorque(torque);
         }
     }
 }
