@@ -9,10 +9,17 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent ai;
     public float hitForce;
     public int health;
+    public GameObject waveManager;
     void Start()
     {
         player = GameObject.Find("Player");
+        waveManager = GameObject.Find("WaveManager");
         playerController = player.GetComponent<PlayerMovement>();
+        health *= waveManager.GetComponent<WaveManager>().wave;
+        if (health > 5)
+        {
+            health = 15;
+        }
     }
 
     // Update is called once per frame
