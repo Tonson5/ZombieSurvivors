@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour
     public void SpawnZombies()
     {
         Instantiate(zombie, transform.position, transform.rotation);
-        for (int i = 0; i < wave/2; i++)
+        for (int i = 0; i < wave/0.5f; i++)
         {
             transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
             Instantiate(zombie, transform.position, transform.rotation);
