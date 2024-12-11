@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public Texture fullHealth;
     public Texture mediumHealth;
     public Texture lowHealth;
+    public GameObject bullet;
+    public GameObject bulletSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,10 @@ public class PlayerMovement : MonoBehaviour
         if (health == 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
         }
     }
     // Update is called once per frame
