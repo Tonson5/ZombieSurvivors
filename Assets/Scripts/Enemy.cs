@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float hitForce;
     public int health;
     public GameObject waveManager;
+    public GameObject money;
     void Start()
     {
         player = GameObject.Find("Player");
@@ -34,7 +35,10 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
-
+        for (int i = 0; i < Random.Range(3,15); i++)
+        {
+            Instantiate(money,transform.position,transform.rotation);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {

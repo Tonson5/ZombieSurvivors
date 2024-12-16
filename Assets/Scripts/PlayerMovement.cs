@@ -77,10 +77,7 @@ public class PlayerMovement : MonoBehaviour
                 placeToLook = enemies[0].transform.position;
             }
             Vector3 direction = placeToLook - transform.position;
-            Quaternion desiredRotation = Quaternion.LookRotation(direction); 
-            Quaternion deltaRotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, turnSpeed * Time.deltaTime); 
-            Vector3 deltaEulerAngles = deltaRotation.eulerAngles - transform.rotation.eulerAngles; 
-            Vector3 torque = new Vector3(deltaEulerAngles.x, deltaEulerAngles.y, deltaEulerAngles.z) * turnSpeed; rb.AddTorque(torque);
+            transform.forward = direction;
         }
     }
 }

@@ -127,6 +127,8 @@ MonoBehaviour:
   ai: {fileID: 3901039661076836850}
   hitForce: 10
   health: 2
+  waveManager: {fileID: 0}
+  money: {fileID: 8688410455411977229, guid: 341c7cc106ad13545b78113c0d43530d, type: 3}
 --- !u!195 &3901039661076836850
 NavMeshAgent:
   m_ObjectHideFlags: 0
