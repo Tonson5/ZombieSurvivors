@@ -19,7 +19,11 @@ public class XP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.AddForce((player.transform.position - transform.position).normalized * speed,ForceMode.Force);
+        if ((transform.position - player.transform.position).magnitude < 5)
+        {
+            rb.AddForce((player.transform.position - transform.position).normalized * speed, ForceMode.Force);
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {

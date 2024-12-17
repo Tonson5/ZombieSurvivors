@@ -17,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     public Texture lowHealth;
     public GameObject bullet;
     public GameObject bulletSpawn;
+    public GameObject lookTarget;
+    public Vector3 direction;
+    public float lookSpeed;
+    public bool canShoot;
+    public float shootCoolDown;
+    public Money myMoney;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,13 +49,14 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+            Shoot();
         }
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         MovePlayer();
+        lookTarget.GetComponent<Rigidbody>().AddForce(direction * lookSpeed);
     }
     public void MovePlayer()
     {
@@ -76,8 +83,31 @@ public class PlayerMovement : MonoBehaviour
             {
                 placeToLook = enemies[0].transform.position;
             }
-            Vector3 direction = placeToLook - transform.position;
-            transform.forward = direction;
+
+            direction = (placeToLook - lookTarget.transform.position).normalized;
+            
+            transform.forward = lookTarget.transform.position - transform.position;
+        }
+    }
+    public void Shoot()
+    {
+        if (canShoot)
+        {
+            Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+            canShoot = false;
+            Invoke("Cooldown", shootCoolDown);
+        }
+    }
+    public void Cooldown()
+    {
+        canShoot = true;
+    }
+    public void UpgradeShooting()
+    {
+        if (myMoney.money >= 50)
+        {
+            myMoney.TakeMoney(50);
+            shootCoolDown /= 1.1f;
         }
     }
 }

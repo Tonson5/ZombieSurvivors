@@ -19,4 +19,8 @@ public class Money : MonoBehaviour
     {
         moneyShown.text = "Money: " + money;
     }
+    public void TakeMoney(int moneyToTake)
+    {
+        money -= moneyToTake;
+    }
 }
