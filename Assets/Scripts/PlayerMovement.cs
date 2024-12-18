@@ -22,7 +22,11 @@ public class PlayerMovement : MonoBehaviour
     public float lookSpeed;
     public bool canShoot;
     public float shootCoolDown;
+    public bool FullAuto;
+    public int amountRotatable;
+    public int amountToShoot;
     public Money myMoney;
+    public GameObject restartButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,9 +49,15 @@ public class PlayerMovement : MonoBehaviour
         }
         if (health == 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            restartButton.SetActive(true);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Destroy(gameObject);
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !FullAuto)
+        {
+            Shoot();
+        }
+        if (Input.GetButton("Fire1") && FullAuto)
         {
             Shoot();
         }
@@ -93,7 +103,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canShoot)
         {
-            Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+            for (int i = 0; i < amountToShoot; i++)
+            {
+                Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation).gameObject.GetComponent<Bullet>().amountRotatable = amountRotatable;
+            }
             canShoot = false;
             Invoke("Cooldown", shootCoolDown);
         }
@@ -108,6 +121,30 @@ public class PlayerMovement : MonoBehaviour
         {
             myMoney.TakeMoney(50);
             shootCoolDown /= 1.1f;
+        }
+    }
+    public void UpgradeFullAuto()
+    {
+        if (myMoney.money >= 1000)
+        {
+            myMoney.TakeMoney(1000);
+            FullAuto = true;
+        }
+    }
+    public void UpgradeSpread()
+    {
+        if (myMoney.money >= 100)
+        {
+            amountRotatable += 5;
+            myMoney.TakeMoney(100);
+        }
+    }
+    public void UpgradeAmountToShoot()
+    {
+        if (myMoney.money >= 250)
+        {
+            amountToShoot += 1;
+            myMoney.TakeMoney(250);
         }
     }
 }
