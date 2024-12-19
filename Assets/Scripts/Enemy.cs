@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
+    public AudioSource sfx;
+    public AudioClip hit;
+    public AudioClip die;
     public GameObject player;
     public PlayerMovement playerController;
     public NavMeshAgent ai;
@@ -13,14 +16,12 @@ public class Enemy : MonoBehaviour
     public GameObject money;
     void Start()
     {
+        sfx = GameObject.Find("Audio Source").GetComponent<AudioSource>();
         player = GameObject.Find("Player");
         waveManager = GameObject.Find("WaveManager");
         playerController = player.GetComponent<PlayerMovement>();
         health *= waveManager.GetComponent<WaveManager>().wave;
-        if (health > 5)
-        {
-            health = 15;
-        }
+        
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
+        sfx.PlayOneShot(die);
         Destroy(gameObject);
         for (int i = 0; i < Random.Range(3,15); i++)
         {
@@ -44,6 +46,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            sfx.PlayOneShot(hit);
             playerController.health -= 1;
             collision.gameObject.GetComponent<Rigidbody>().AddForce((collision.gameObject.transform.position - transform.position).normalized *hitForce ,ForceMode.VelocityChange);
         }

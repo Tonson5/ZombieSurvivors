@@ -27,6 +27,9 @@ public class PlayerMovement : MonoBehaviour
     public int amountToShoot;
     public Money myMoney;
     public GameObject restartButton;
+    public AudioClip upgrade;
+    public AudioClip shoot;
+    public AudioSource sfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -109,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
             }
             canShoot = false;
             Invoke("Cooldown", shootCoolDown);
+            sfx.PlayOneShot(shoot);
         }
     }
     public void Cooldown()
@@ -121,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
         {
             myMoney.TakeMoney(50);
             shootCoolDown /= 1.1f;
+            sfx.PlayOneShot(upgrade);
         }
     }
     public void UpgradeFullAuto()
@@ -129,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
         {
             myMoney.TakeMoney(1000);
             FullAuto = true;
+            sfx.PlayOneShot(upgrade);
         }
     }
     public void UpgradeSpread()
@@ -137,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
         {
             amountRotatable += 5;
             myMoney.TakeMoney(100);
+            sfx.PlayOneShot(upgrade);
         }
     }
     public void UpgradeAmountToShoot()
@@ -145,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
         {
             amountToShoot += 1;
             myMoney.TakeMoney(250);
+            sfx.PlayOneShot(upgrade);
         }
     }
 }

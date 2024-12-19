@@ -29,9 +29,9 @@ public class WaveManager : MonoBehaviour
             Instantiate(zombie, transform.position, transform.rotation);
         }
         wave += 1;
-        if (wave > 25)
+        if (wave > 100)
         {
-            wave = 25;
+            wave = 100;
         }
         
     }
