@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public GameObject zombie;
+    public GameObject[] enemies;
     public int wave;
     public GameObject[] spawnPoints;
     void Start()
@@ -21,13 +21,25 @@ public class WaveManager : MonoBehaviour
         }
     }
     public void SpawnZombies()
-    {
-        Instantiate(zombie, transform.position, transform.rotation);
-        for (int i = 0; i < wave/0.5f; i++)
+    {if (wave > 10)
         {
-            transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-            Instantiate(zombie, transform.position, transform.rotation);
+            Instantiate(Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position, transform.rotation));
+            for (int i = 0; i < wave / 0.5f; i++)
+            {
+                transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+                Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position, transform.rotation);
+            }
         }
+    else
+        {
+            Instantiate(Instantiate(enemies[0], transform.position, transform.rotation));
+            for (int i = 0; i < wave / 0.5f; i++)
+            {
+                transform.position = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+                Instantiate(enemies[0], transform.position, transform.rotation);
+            }
+        }
+        
         wave += 1;
         if (wave > 100)
         {

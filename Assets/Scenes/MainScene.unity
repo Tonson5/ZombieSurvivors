@@ -8123,7 +8123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f46e30a37cc3e64885070f5d2b9c962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombie: {fileID: 6441011792835362131, guid: e6182662d9ea0104fa914dc6d4d606e2, type: 3}
+  enemies:
+  - {fileID: 6441011792835362131, guid: e6182662d9ea0104fa914dc6d4d606e2, type: 3}
+  - {fileID: 4395757420953977423, guid: 4e8936c059478aa40871a85aa3e8c093, type: 3}
   wave: 1
   spawnPoints:
   - {fileID: 355830752}
@@ -9465,7 +9467,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1879004277}
   - component: {fileID: 1879004276}
-  - component: {fileID: 1879004275}
   - component: {fileID: 1879004274}
   - component: {fileID: 1879004273}
   m_Layer: 0
@@ -9553,14 +9554,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &1879004275
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879004272}
-  m_Enabled: 1
 --- !u!20 &1879004276
 Camera:
   m_ObjectHideFlags: 0
