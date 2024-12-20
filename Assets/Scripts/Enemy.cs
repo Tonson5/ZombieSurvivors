@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     {
         sfx.PlayOneShot(die);
         Destroy(gameObject);
-        for (int i = 0; i < Random.Range(3,15); i++)
+        for (int i = 0; i < Random.Range(5,25); i++)
         {
             Instantiate(money,transform.position,transform.rotation);
         }
